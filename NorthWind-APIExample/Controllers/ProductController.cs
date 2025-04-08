@@ -21,5 +21,13 @@ namespace NorthWind_APIExample.Controllers
             _mapper = mapper;
 
         }
+
+        //GET ALL PRODUCTS
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
+        {
+            var products= await _context.Products.ToListAsync();
+            var productDtos = _mapper.Map<List<ProductDto>>(products);
+            return Ok(productDtos);
+        }
     }
 }
