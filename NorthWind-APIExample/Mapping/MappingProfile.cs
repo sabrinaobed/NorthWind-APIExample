@@ -4,7 +4,11 @@ using NorthWind_APIExample.Dto;
 
 namespace NorthWind_APIExample.Mapping
 {
-    public class MappingProfile
+    public class MappingProfile : Profile
     {
+        public MappingProfile()
+        {
+            CreateMap<Product,ProductDto>().ReverseMap();
+        }
     }
 }
