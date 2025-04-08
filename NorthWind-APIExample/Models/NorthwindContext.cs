@@ -15,6 +15,7 @@ public partial class NorthwindContext : DbContext
     {
     }
 
+
     public virtual DbSet<Product> Products { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
