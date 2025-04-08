@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using NorthWind_APIExample.Models;
+
 namespace NorthWind_APIExample
 {
     public class Program
@@ -13,6 +16,11 @@ namespace NorthWind_APIExample
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(typeof(Program));
+
+            //Register the database context
+            builder.Services.AddDbContext<NorthwindContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("NorthwindConnection")));
 
             var app = builder.Build();
 
