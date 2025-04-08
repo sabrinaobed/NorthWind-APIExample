@@ -16,6 +16,7 @@ namespace NorthWind_APIExample
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(typeof(Program));
 
             //Register the database context
             builder.Services.AddDbContext<NorthwindContext>(options =>
