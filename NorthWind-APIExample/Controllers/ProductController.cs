@@ -56,6 +56,32 @@ namespace NorthWind_APIExample.Controllers
             return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, _mapper.Map<ProductDto>(product));
         }
 
+        //UPDATE PRODUCT
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, ProductDto productDto)
+        {
+            if (id != productDto.ProductId)
+            {
+                return BadRequest();
+            }
+            var product = _mapper.Map<Product>(productDto);
+            _context.Entry(product).State = EntityState.Modified;
 
-    }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Products.Any(e => e.ProductId == id))
+
+                    return NotFound();
+                throw;
+            }
+
+            return NoContent();
+        }
+
+
+     }
 } 
